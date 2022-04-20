@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Elokuvat</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Lista elokuvista</h1>
+	<table class="table table-striped">
+	<tr>
+	<td>Nimi:</td>
+	<td>Kesto:</td>
+	<td>Vuosi:</td>
+	<td>Kategoria</td>
+	</tr>
+	<tr th:each = "elokuva : ${elokuvat}">
+	<td th:text="${elokuva.nimi}"></td>
+	<td th:text="${elokuva.kesto}"></td>
+	<td th:text="${elokuva.vuosi}"></td>
+	<td th:text="${elokuva.kategoria.kategoriaNimi}"></td>
+	<td><a th:href="@{/edit/{id}(id=${elokuva.id})}">Muokkaa</a></td>
+	<td sec:authorize="hasAuthority('ADMIN')"> <a th:href="@{/delete/{id}(id=${elokuva.id})}">Poista</a></td>
+	</table>
+	<div sec:authorize="hasAuthority('ADMIN')"><a href="/add" class="btn btn-primary">Lisää elokuva</a></div>
+	
+</body>
+</html>
