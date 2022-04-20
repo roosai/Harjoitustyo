@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import kevat22.Harjoitustyo.domain.Elokuva;
 import kevat22.Harjoitustyo.domain.ElokuvaRepository;
 import kevat22.Harjoitustyo.domain.KategoriaRepository;
+import kevat22.Harjoitustyo.domain.TilaRepository;
 
 @Controller
 public class ElokuvaController {
@@ -20,6 +21,9 @@ public class ElokuvaController {
 	
 	@Autowired
 	private KategoriaRepository krepository;
+	
+	@Autowired
+	private TilaRepository trepository;
 	
 	@RequestMapping(value= {"/", "/elokuvalistaus"})
 	public String elokuvalistaus (Model model) {
@@ -34,6 +38,7 @@ public class ElokuvaController {
 	public String lisaaElokuva(Model model) {
 		model.addAttribute("elokuva", new Elokuva());
 		model.addAttribute("kategoriat", krepository.findAll());
+		model.addAttribute("tilat", trepository.findAll());
 		return "lisaaelokuva";
 	}
 	
@@ -54,6 +59,7 @@ public class ElokuvaController {
 	public String lisaaElokuva(@PathVariable("id") Long elokuvaId, Model model) {
 		model.addAttribute("elokuva", erepository.findById(elokuvaId));
 		model.addAttribute("kategoriat", krepository.findAll());
+		model.addAttribute("tilat", trepository.findAll());
 		return "muokkaaelokuva";
 	}
 	

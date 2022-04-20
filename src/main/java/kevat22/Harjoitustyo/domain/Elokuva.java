@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+
 @Entity
 public class Elokuva {
 	@Id
@@ -18,6 +19,10 @@ public class Elokuva {
 	@ManyToOne
 	@JoinColumn(name="kategoriaid")
 	private Kategoria kategoria;
+	
+	@ManyToOne
+	@JoinColumn(name="tilaId")
+	private Tila tila;
 	
 	public Long getId() {
 		return id;
@@ -43,12 +48,19 @@ public class Elokuva {
 	public void setKesto(int kesto) {
 		this.kesto = kesto;
 	}
-	public Elokuva(String nimi, int vuosi, int kesto, Kategoria kategoria) {
+	public Elokuva(String nimi, int vuosi, int kesto, Kategoria kategoria, Tila tila) {
 		super();
 		this.nimi = nimi;
 		this.vuosi = vuosi;
 		this.kesto = kesto;
 		this.kategoria = kategoria;
+		this.tila = tila;
+	}
+	public Elokuva(String nimi, int vuosi, int kesto) {
+		super();
+		this.nimi=nimi;
+		this.vuosi=vuosi;
+		this.kesto=kesto;
 	}
 	public Elokuva() {
 		super();
@@ -62,10 +74,16 @@ public class Elokuva {
 		this.kategoria=kategoria;
 	}
 	
+	public Tila getTila() {
+		return tila;
+	}
+	public void setTila(Tila tila) {
+		this.tila = tila;
+	}
 	@Override
 	public String toString() {
 		if(this.kategoria != null)
-		return "Elokuva [id=" + id + ", nimi=" + nimi + ", vuosi=" + vuosi + ", kesto=" + kesto + ", kategoria "+ this.getKategoria()+"]";
+		return "Elokuva [id=" + id + ", nimi=" + nimi + ", vuosi=" + vuosi + ", kesto=" + kesto + ", kategoria "+ this.getKategoria()+", tila " + this.getTila()+"]";
 		else
 			return "Elokuva [id=" + id + ", nimi=" + nimi + ", vuosi=" + vuosi + ", kesto=" + kesto + "]";
 	}

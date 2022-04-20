@@ -4,9 +4,7 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface ElokuvaRepository extends CrudRepository<Elokuva, Long> {
-	
-	List<Elokuva> findByNimi(String nimi);
-	
-		
+public interface TilaRepository extends CrudRepository<Tila, Long>{
+	List<Tila> findByTila(String tila);
+
 }

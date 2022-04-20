@@ -3,10 +3,12 @@
 <head>
     <title>Muokkaa Elokuva</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
 	<h1>Muokkaa elokuva</h1>
 	<div>
+	<div class="col-md-4">
 	<form th:object="${elokuva}" th:action="@{../save}" action="#" method="post">
 	<input type="hidden" th:field="*{id}" class="form-control"/>
 	<label for="nimi">Nimi</label>
@@ -16,18 +18,23 @@
 	<input type="text" id="kesto" th:field="*{kesto}"/>
 	<div style="clear: both; display: block; height: 10px;"></div>
 	<label for="vuosi">Vuosi</label>
-	<input type="text" id="vuosi" th:field="*{vuosi}"/>
+	<input  type="text" id="vuosi" th:field="*{vuosi}"/>
 	<div style="clear: both; display: block; height: 10px;"></div>
 	
 	<label for="katlista">Kategoria</label>
-	<select id="katlista" th:field="*{kategoria}" class="form-control">
+	<select  id="katlista" th:field="*{kategoria}" class="form-control">
 	<option th:each="kategoria: ${kategoriat}" th:value="${kategoria.kategoriaid}" th:text="${kategoria.kategoriaNimi}"></option>
+	</select>
+	<div style="clear: both; display: block; height: 10px;"></div>
+	<label for="tilalista">Tila</label>
+	<select id="tilalista" th:field="*{tila}" class="form-control">
+	<option th:each="tila: ${tilat}" th:value= "${tila.tilaId}" th:text="${tila.tila}"></option>
 	</select>
 	
 	<div style="clear: both; display: block; height: 10px;"></div>
-	<input type="submit" value="Save"></input>
+	<input type="submit" value="Tallenna"></input>
 	</form>
-	
+	</div>
 	</div>
 	
 </body>

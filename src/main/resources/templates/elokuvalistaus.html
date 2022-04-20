@@ -3,25 +3,36 @@
 <head>
     <title>Elokuvat</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    	<link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
+<div class="col-md-4">
 	<h1>Lista elokuvista</h1>
+	</div>
+	<div class="col-md-4">
+		<h3 th:inline="text">Tervetuloa [[${#httpServletRequest.remoteUser}]] !</h3>
+	</div>
 	<table class="table table-striped">
 	<tr>
 	<td>Nimi:</td>
 	<td>Kesto:</td>
 	<td>Vuosi:</td>
-	<td>Kategoria</td>
+	<td>Kategoria:</td>
+	<td>Tila:</td>
 	</tr>
 	<tr th:each = "elokuva : ${elokuvat}">
 	<td th:text="${elokuva.nimi}"></td>
 	<td th:text="${elokuva.kesto}"></td>
 	<td th:text="${elokuva.vuosi}"></td>
 	<td th:text="${elokuva.kategoria.kategoriaNimi}"></td>
+	<td th:text="${elokuva.tila.tila}"></td>
 	<td><a th:href="@{/edit/{id}(id=${elokuva.id})}">Muokkaa</a></td>
 	<td sec:authorize="hasAuthority('ADMIN')"> <a th:href="@{/delete/{id}(id=${elokuva.id})}">Poista</a></td>
 	</table>
 	<div sec:authorize="hasAuthority('ADMIN')"><a href="/add" class="btn btn-primary">Lisää elokuva</a></div>
-	
+	<br><br>
+	<div class="col-md-4" style="padding:20px 0">
+	<a href="/logout"><i>Kirjaudu ulos</i></a>
+	</div>
 </body>
 </html>
